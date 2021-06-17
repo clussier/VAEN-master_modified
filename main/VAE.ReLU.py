@@ -20,7 +20,7 @@ np.random.seed(40)
 
 #np.random.seed(int("VAE.ReLU.py"))
 
-# The below is necessary for starting core Python generated random numbers
+# The below is necessary for s4tarting core Python generated random numbers
 # in a well-defined state.
 rn.seed(12345)
 
@@ -51,7 +51,7 @@ import keras
 
 import pydot
 import graphviz
-from keras.utils import plot_model
+from tensorflow.keras.utils import plot_model
 from keras_tqdm import TQDMNotebookCallback
 from IPython.display import SVG
 from keras.utils.vis_utils import model_to_dot
@@ -59,15 +59,23 @@ from keras.utils.vis_utils import model_to_dot
 print(keras.__version__)
 tf.__version__
 
-work_dir = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/"
-train_file_path = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/V15.CCLE.4VAE.SZ.tsv"#sys.argv[3] #ccle.zeroone_5000_0.2.tsv
-val_file_1_path = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/V15.TCGA.4VAE.SZ.tsv"#sys.argv[4] #PANCAN.zeroone_5000_0.2.tsv
-train_latent_file = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/main/ZS.ReLU/C1.CCLE.latent.tsv"#sys.argv[5] #CCLE_latent_5000_0.2.tsv
-train_weight_file = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/main/ZS.ReLU/C1.CCLE.weight.tsv"#sys.argv[6] #CCLE_gene_weights_5000_0.2.tsv
-val_1_pred_file = "extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/V15.TCGA.4VAE.SZ_prediction.tsv"#sys.argv[7] #PANCAN_prediction_5000_0.2.tsv
-encoder_file = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/main/ZS.ReLU/1.encoder.hdf5"#sys.argv[8] # CCLE_encoder_onehidden_vae.hdf5
-decoder_file = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/main/ZS.ReLU/1.decoder.hdf5"#sys.argv[9] # CCLE_decoder_onehidden_vae.hdf5
+#work_dir = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/"
+#train_file_path = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/V15.CCLE.4VAE.SZ.tsv"#sys.argv[3] #ccle.zeroone_5000_0.2.tsv
+#val_file_1_path = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/V15.TCGA.4VAE.SZ.tsv"#sys.argv[4] #PANCAN.zeroone_5000_0.2.tsv
+#train_latent_file = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/main/ZS.ReLU/C1.CCLE.latent.tsv"#sys.argv[5] #CCLE_latent_5000_0.2.tsv
+#train_weight_file = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/main/ZS.ReLU/C1.CCLE.weight.tsv"#sys.argv[6] #CCLE_gene_weights_5000_0.2.tsv
+#val_1_pred_file = "extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/V15.TCGA.4VAE.SZ_prediction.tsv"#sys.argv[7] #PANCAN_prediction_5000_0.2.tsv
+#encoder_file = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/main/ZS.ReLU/1.encoder.hdf5"#sys.argv[8] # CCLE_encoder_onehidden_vae.hdf5
+#decoder_file = "/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/main/ZS.ReLU/1.decoder.hdf5"#sys.argv[9] # CCLE_decoder_onehidden_vae.hdf5
 
+work_dir = "/Users/evaluna/DrugResponse/vaen_rerun/"
+train_file_path = "/Users/evaluna/DrugResponse/vaen_rerun/V15.CCLE.4VAE.SZ.tsv"#sys.argv[3] #ccle.zeroone_5000_0.2.tsv
+val_file_1_path = "/Users/evaluna/DrugResponse/vaen_rerun/V15.TCGA.4VAE.SZ.tsv"#sys.argv[4] #PANCAN.zeroone_5000_0.2.tsv
+train_latent_file = "/Users/evaluna/DrugResponse/ZS.ReLU/C1.CCLE.latent.tsv"#sys.argv[5] #CCLE_latent_5000_0.2.tsv
+train_weight_file = "/Users/evaluna/DrugResponse/ZS.ReLU/C1.CCLE.weight.tsv"#sys.argv[6] #CCLE_gene_weights_5000_0.2.tsv
+val_1_pred_file = "/Users/evaluna/DrugResponse/vaen_rerun/V15.TCGA.4VAE.SZ_prediction.tsv"#sys.argv[7] #PANCAN_prediction_5000_0.2.tsv
+encoder_file = "/Users/evaluna/DrugResponse/ZS.ReLU/1.encoder.hdf5"#sys.argv[8] # CCLE_encoder_onehidden_vae.hdf5
+decoder_file = "/Users/evaluna/DrugResponse/ZS.ReLU/1.decoder.hdf5"#sys.argv[9] # CCLE_decoder_onehidden_vae.hdf5
 
 
 print ("work_dir: %s" % work_dir)
@@ -178,7 +186,6 @@ hist = vae.fit(np.array(rnaseq_train_df),
                validation_data=(np.array(rnaseq_test_df), None),
                callbacks=[WarmUpCallback(beta, kappa),
                TQDMNotebookCallback(leave_inner=True, leave_outer=True)])
-
 
 
 history_df = pd.DataFrame(hist.history)
@@ -303,6 +310,9 @@ from keras_tqdm import TQDMNotebookCallback
 from IPython.display import SVG
 from keras.utils.vis_utils import model_to_dot
 
+from tqdm import tqdm
+
+
 print(keras.__version__)
 tf.__version__
 
@@ -406,7 +416,7 @@ decoder_to_reconstruct = Dense(original_dim, kernel_initializer='glorot_uniform'
 
 rnaseq_reconstruct = decoder_to_reconstruct(drop_layer)			####### modified
 
-adam = optimizers.Adam(lr=learning_rate)
+adam = keras.optimizers.Adam(lr=learning_rate)
 vae_layer = CustomVariationalLayer()([rnaseq_input, rnaseq_reconstruct])
 vae = Model(rnaseq_input, vae_layer)
 
@@ -421,7 +431,7 @@ vae.summary()
 #plot_model(vae, to_file=output_model_file)
 #SVG(model_to_dot(vae).create(prog='dot', format='svg'))
 
-
+vae.fit(np.array(rnaseq_train_df), epochs=100, batch_size=100)
 
 hist = vae.fit(np.array(rnaseq_train_df),
                shuffle=True,
