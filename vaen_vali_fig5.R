@@ -20,3 +20,5 @@ GR_result<-eval_result(preds_GR)
 GR_result$method <- "GR paper linear Ridge"
 GR_result$drug <- drug
 cat(paste(Sys.time(),"==========","1. GR paper linear Ridge Complete\n"))
+
+preds_GR<-predict(model_GR,exp)

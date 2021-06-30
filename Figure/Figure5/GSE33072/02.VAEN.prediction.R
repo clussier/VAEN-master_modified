@@ -3,7 +3,6 @@ setwd("/path/to/GitHub/Figure/Figure5/GSE33072")
 cur.genes = read.table("../../../result/key.genes.txt", as.is=T)
 cur.genes = cur.genes[,1]
 
-
 load("GSE33072.RData")
 val.RPKM = expr.mat
 match(cur.genes, rownames(val.RPKM)) -> ii

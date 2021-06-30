@@ -264,7 +264,11 @@ os.environ['KERAS_BACKEND']='tensorflow'
 
 import tensorflow as tf
 from keras import backend as K
+#The python
+#library for deep learning, Keras (version 2.1.6)40 with a TensorFlow backend
+#(version 1.0.1)41, was used to implement the VAE.
 
+#
 ## obtain reproducible results - START
 os.environ['PYTHONHASHSEED'] = '0'
 # The below is necessary for starting Numpy generated random numbers
@@ -309,9 +313,6 @@ from keras.utils import plot_model
 from keras_tqdm import TQDMNotebookCallback
 from IPython.display import SVG
 from keras.utils.vis_utils import model_to_dot
-
-from tqdm import tqdm
-
 
 print(keras.__version__)
 tf.__version__

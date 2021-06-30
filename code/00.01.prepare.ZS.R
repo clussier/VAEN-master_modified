@@ -81,6 +81,7 @@ for(k in 1:length(cancer.types)){
 	cancer = cancer.types[k]
 	original.LUAD.RPKM = read.delim(paste("/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/DATA/TCGA/",cancer,"/HiSeqV2", sep=""), as.is=T)
 
+cat(cancer,dim(original.LUAD.RPKM))
 	### exclude genes with rowSum == 0
 	apply(original.TCGA.RPKM[,-1],1,sum) -> rowCheck
 	non0.TCGA.RPKM = original.TCGA.RPKM[which(rowCheck!=0),]

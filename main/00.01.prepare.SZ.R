@@ -1,4 +1,4 @@
-setwd("/path/to/VAEN/main")
+setwd("/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun")
 
 ### transcriptome data
 

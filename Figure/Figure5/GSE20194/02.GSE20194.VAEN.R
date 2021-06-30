@@ -113,7 +113,7 @@ GSE20194.probabilities = predict(fit, as.matrix(GSE20194.pred[,-1]), s = 'lambda
 GSE20194.pred.mat = cbind(GSE20194.pred[,1], GSE20194.probabilities)
 colnames(GSE20194.pred.mat) = c("Sample", drug)
 
-write.table(GSE20194.pred.mat, file=paste("/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/Figure/Figure5/GSE20194/GDSC.A.pred_GSE20194.txt", sep=""), quote=F, sep="\t", row.names=FALSE)
+write.table(GSE20194.pred.mat, file=paste("/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/GDSC.A.pred_GSE20194.txt", sep=""), quote=F, sep="\t", row.names=FALSE)
 
 ##### plot
 gdsc = read.table("GDSC.A.pred_GSE20194.txt", as.is=T, header=T)
@@ -133,7 +133,7 @@ p6 = ggplot(dat, aes(x=pCR, y=Response, fill=pCR)) + geom_boxplot() +
      theme(legend.position = "none", plot.title = element_text(hjust=0.5)) +
      stat_summary(fun.data = give.n, geom = "text")
 
-pdf("/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/VAEN/Figure/Figure5/GSE20194/5G.3.CCLE.Paclitaxel.sensitive.ggplot.pdf", width=6, height=6)
+pdf("/extraspace/ychen42/Drug_Response/bioinfo.uth.edu/vaen_rerun/5G.3.CCLE.Paclitaxel.sensitive.ggplot.pdf", width=6, height=6)
 print(p6)
 dev.off()
 
