@@ -71,7 +71,7 @@ tf.__version__
 work_dir = "/Users/evaluna/DrugResponse/vaen_rerun/"
 train_file_path = "/Users/evaluna/DrugResponse/vaen_rerun/V15.CCLE.4VAE.SZ.tsv"#sys.argv[3] #ccle.zeroone_5000_0.2.tsv
 val_file_1_path = "/Users/evaluna/DrugResponse/vaen_rerun/V15.TCGA.4VAE.SZ.tsv"#sys.argv[4] #PANCAN.zeroone_5000_0.2.tsv
-train_latent_file = "/Users/evaluna/DrugResponse/ZS.ReLU/C1.CCLE.latent.tsv"#sys.argv[5] #CCLE_latent_5000_0.2.tsv
+train_latent_file = "/Users/evaluna/DrugResponse/ZS.ReLU/C1.CCLE.latent.tsv"#sys.argv[5] #CCLE_latent_5000_0.2.tsv //Path for generated result for this
 train_weight_file = "/Users/evaluna/DrugResponse/ZS.ReLU/C1.CCLE.weight.tsv"#sys.argv[6] #CCLE_gene_weights_5000_0.2.tsv
 val_1_pred_file = "/Users/evaluna/DrugResponse/vaen_rerun/V15.TCGA.4VAE.SZ_prediction.tsv"#sys.argv[7] #PANCAN_prediction_5000_0.2.tsv
 encoder_file = "/Users/evaluna/DrugResponse/ZS.ReLU/1.encoder.hdf5"#sys.argv[8] # CCLE_encoder_onehidden_vae.hdf5
@@ -121,15 +121,16 @@ class WarmUpCallback(Callback):
 
 ####rnaseq_file = os.path.join('/data1_2/jiap/projects/18-CCLE-VAE/SCALE', 'ccle.zeroone_5000_0.2.tsv')
 rnaseq_file = os.path.join(work_dir, train_file_path)
-rnaseq_df = pd.read_table(rnaseq_file, index_col=0)
+rnaseq_df = pd.read_csv(rnaseq_file, index_col=0)
 print(rnaseq_df.shape)
 rnaseq_df.head(2)
 
 ####val_file = os.path.join('/data1_2/jiap/projects/18-CCLE-VAE/SCALE', 'PANCAN.zeroone_5000_0.2.tsv')
 val_file_1 = os.path.join(work_dir, val_file_1_path)
-val_df_1 = pd.read_table(val_file_1, index_col=0)
+val_df_1 = pd.read_csv(val_file_1, index_col=0)
 print(val_df_1.shape)
 val_df_1.head(2)
+
 
 
 test_set_percent = 0.1
@@ -177,7 +178,7 @@ vae.summary()
 #output_model_file = os.path.join('/data1_2/jiap/projects/18-CCLE-VAE/SCALE', 'onehidden_vae_architecture.png')
 #plot_model(vae, to_file=output_model_file)
 #SVG(model_to_dot(vae).create(prog='dot', format='svg'))
-
+#This hist requires jupiter
 hist = vae.fit(np.array(rnaseq_train_df),
                shuffle=True,
                epochs=epochs,
@@ -371,13 +372,13 @@ class WarmUpCallback(Callback):
 
 ####rnaseq_file = os.path.join('/data1_2/jiap/projects/18-CCLE-VAE/SCALE', 'ccle.zeroone_5000_0.2.tsv')
 rnaseq_file = os.path.join(work_dir, train_file_path)
-rnaseq_df = pd.read_table(rnaseq_file, index_col=0)
+rnaseq_df = pd.read_csv(rnaseq_file, index_col=0)
 print(rnaseq_df.shape)
 rnaseq_df.head(2)
 
 ####val_file = os.path.join('/data1_2/jiap/projects/18-CCLE-VAE/SCALE', 'PANCAN.zeroone_5000_0.2.tsv')
 val_file_1 = os.path.join(work_dir, val_file_1_path)
-val_df_1 = pd.read_table(val_file_1, index_col=0)
+val_df_1 = pd.read_csv(val_file_1, index_col=0)
 print(val_df_1.shape)
 val_df_1.head(2)
 
